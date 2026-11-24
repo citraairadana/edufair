@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Edu Fair & Career Expo 2026 - SMKN 6 Tangsel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #022859 0%, #03418c 50%, #1164cc 100%);
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 720px;
+            position: relative;
+        }
+
+        /* ================= HALAMAN COVER / SAMPUL ================= */
+        .cover-page {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(2, 40, 89, 0.35);
+            overflow: hidden;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 10;
+            border: 2px solid rgba(250, 204, 21, 0.3);
+        }
+
+        .cover-page.hidden {
+            opacity: 0;
+            transform: translateY(-40px) scale(0.97);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .cover-header {
+            background: linear-gradient(135deg, #03418c 0%, #1164cc 100%);
+            padding: 48px 28px 40px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .badge-gold {
+            display: inline-block;
+            background: #facc15;
+            color: #172554;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 6px 22px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+        }
+
+        .cover-header h1 {
+            font-size: 1.95rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .cover-header p {
+            font-size: 0.92rem;
+            color: #dbeafe;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .cover-body {
+            padding: 36px 28px;
+        }
+
+        .guest-card-preview {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #03418c;
+            border-radius: 14px;
+            padding: 22px 24px;
+            text-align: left;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .guest-card-preview .label-to {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .guest-card-preview h2 {
+            font-size: 1.45rem;
+            color: #03418c;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .btn-open-invite {
+            background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+            color: #172554;
+            border: none;
+            width: 100%;
+            max-width: 320px;
+            padding: 16px 24px;
+            border-radius: 14px;
+            font-size: 1.02rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(234, 179, 8, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .btn-open-invite:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(234, 179, 8, 0.5);
+        }
+
+        /* ================= HALAMAN ISI UNDANGAN UTAMA ================= */
+        .main-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(2, 40, 89, 0.35);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border: 2px solid rgba(250, 204, 21, 0.3);
+        }
+
+        .main-card.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #03418c 0%, #1164cc 100%);
+            padding: 44px 28px 36px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .hero-banner h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-banner p {
+            font-size: 0.92rem;
+            color: #dbeafe;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .content-body {
+            padding: 32px 32px 36px;
+        }
+
+        /* Kotak Nama Tamu */
+        .recipient-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #03418c;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .recipient-box .to-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .recipient-box h2 {
+            font-size: 1.4rem;
+            color: #03418c;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        /* Statistik Box (10+ Perusahaan & 20+ Kampus) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1.5px solid #fde047;
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.15);
+        }
+
+        .stat-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #854d0e;
+            margin-bottom: 2px;
+        }
+
+        .stat-card p {
+            font-size: 0.82rem;
+            color: #713f12;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Countdown Timer Box */
+        .countdown-container {
+            background: linear-gradient(135deg, #03418c 0%, #022859 100%);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(3, 65, 140, 0.25);
+            border: 1px solid rgba(250, 204, 21, 0.4);
+        }
+
+        .countdown-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #facc15;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 14px;
+        }
+
+        .countdown-timers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px 6px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .time-box small {
+            font-size: 0.72rem;
+            color: #dbeafe;
+            text-transform: uppercase;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #03418c;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 18px;
+        }
+
+        /* Grid Detail Pelaksanaan */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+
+        .info-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #03418c;
+            margin-bottom: 8px;
+        }
+
+        .icon-blue { color: #1164cc; }
+        .icon-orange { color: #ea580c; }
+        .icon-pink { color: #e11d48; }
+        .icon-purple { color: #7c3aed; }
+
+        .info-card p {
+            font-size: 0.9rem;
+            color: #334155;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Rangkaian Acara */
+        .features-list {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item i {
+            color: #16a34a;
+            font-size: 1.1rem;
+        }
+
+        /* Galeri Foto Kegiatan (4 Foto) */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background: #f1f5f9;
+            position: relative;
+            aspect-ratio: 16/10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Peta Maps */
+        .map-wrapper {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 260px;
+            border: 0;
+            display: block;
+        }
+
+        .map-footer-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #f8fafc;
+            color: #03418c;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 12px;
+            border-top: 1px solid #e2e8f0;
+            transition: background 0.2s ease;
+        }
+
+        .map-footer-link:hover {
+            background: #eff6ff;
+        }
+
+        /* RSVP */
+        .rsvp-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .rsvp-box h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #03418c;
+            margin-bottom: 6px;
+        }
+
+        .rsvp-box p {
+            font-size: 0.88rem;
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        .rsvp-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .btn-rsvp-yes, .btn-rsvp-no {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-rsvp-yes {
+            background: #16a34a;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        .btn-rsvp-yes:hover {
+            background: #15803d;
+            transform: translateY(-1px);
+        }
+
+        .btn-rsvp-no {
+            background: #ffffff;
+            color: #dc2626;
+            border: 1.5px solid #fca5a5;
+        }
+
+        .btn-rsvp-no:hover {
+            background: #fef2f2;
+            transform: translateY(-1px);
+        }
+
+        /* Floating Audio Control Button */
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #facc15;
+            color: #03418c;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: transform 0.2s;
+            opacity: 0.7;
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-closing {
+            text-align: center;
+            font-size: 0.84rem;
+            color: #64748b;
+            line-height: 1.6;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 20px;
+        }
+
+        .footer-closing strong {
+            display: block;
+            color: #03418c;
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 600px) {
+            .hero-banner, .cover-header { padding: 32px 20px; }
+            .hero-banner h1, .cover-header h1 { font-size: 1.45rem; }
+            .content-body, .cover-body { padding: 24px 20px; }
+            .info-grid, .stats-grid, .photo-gallery { grid-template-columns: 1fr; gap: 12px; }
+            .rsvp-actions { flex-direction: column; }
+            .countdown-timers { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Musik Latar Mengambil File Lokal musik.mp3 (Sesuaikan nama file jika berbeda) -->
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="LAGU.mpeg" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Tombol Kontrol Audio Melayang -->
+    <button type="button" class="audio-control" id="audioBtn" onclick="toggleAudio()" title="Musik On/Off">
+        <i class="fa-solid fa-music" id="audioIcon"></i>
+    </button>
+
+    <div class="wrapper">
+        <!-- ================= HALAMAN SAMPUL (COVER) ================= -->
+        <div class="cover-page" id="coverPage">
+            <div class="cover-header">
+                <span class="badge-gold">Official Invitation</span>
+                <h1>Edu Fair &amp; Career Expo 2026</h1>
+                <p>"Connecting Competence to Future: Bekerja, Melanjutkan, Berwirausaha"</p>
+            </div>
+
+            <div class="cover-body">
+                <div class="guest-card-preview">
+                    <div class="label-to">Kepada Yth. Bapak/Ibu/Saudara/i:</div>
+                    <h2 id="cover-nama">Tamu Undangan</h2>
+                </div>
+
+                <button type="button" class="btn-open-invite" onclick="bukaUndangan()">
+                    <i class="fa-solid fa-envelope-open-text"></i> Buka Undangan
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN ISI UNDANGAN ================= -->
+        <div class="main-card" id="mainCard">
+            <div class="hero-banner">
+                <span class="badge-gold">Official Invitation</span>
+                <h1>Edu Fair &amp; Career Expo 2026</h1>
+                <p>"Connecting Competence to Future: Bekerja, Melanjutkan, Berwirausaha"</p>
+            </div>
+
+            <div class="content-body">
+                <!-- Kotak Nama Tamu -->
+                <div class="recipient-box">
+                    <div class="to-label">Kepada Yth. Bapak/Ibu/Saudara/i:</div>
+                    <h2 id="main-nama">Tamu Undangan</h2>
+                </div>
+
+                <!-- Statistik Poster: Perusahaan & Kampus -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>10+</h3>
+                        <p>Perusahaan / Industri</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>20+</h3>
+                        <p>Kampus / Perguruan Tinggi</p>
+                    </div>
+                </div>
+
+                <!-- COUNTDOWN TIMER MENUJU 25 NOVEMBER 2026 -->
+                <div class="countdown-container">
+                    <div class="countdown-title"><i class="fa-regular fa-clock"></i> Menuju Hari Acara</div>
+                    <div class="countdown-timers">
+                        <div class="time-box">
+                            <span id="days">00</span>
+                            <small>Hari</small>
+                        </div>
+                        <div class="time-box">
+                            <span id="hours">00</span>
+                            <small>Jam</small>
+                        </div>
+                        <div class="time-box">
+                            <span id="minutes">00</span>
+                            <small>Menit</small>
+                        </div>
+                        <div class="time-box">
+                            <span id="seconds">00</span>
+                            <small>Detik</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Pelaksanaan -->
+                <h3 class="section-heading">Detail Pelaksanaan</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">
+                            <i class="fa-solid fa-calendar-days icon-blue"></i> Hari &amp; Tanggal
+                        </div>
+                        <p>Rabu, 25 November 2026</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-title">
+                            <i class="fa-solid fa-clock icon-orange"></i> Waktu
+                        </div>
+                        <p>07.00 – 14.00 WIB</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-title">
+                            <i class="fa-solid fa-location-dot icon-pink"></i> Lokasi
+                        </div>
+                        <p>SMKN 6 Kota Tangerang Selatan</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-title">
+                            <i class="fa-solid fa-building-columns icon-purple"></i> Penyelenggara
+                        </div>
+                        <p>Panitia Edu Fair &amp; Career Expo — SMKN 6 Kota Tangerang Selatan</p>
+                    </div>
+                </div>
+
+                <!-- Rangkaian Acara dari Poster -->
+                <h3 class="section-heading">Rangkaian Acara</h3>
+                <div class="features-list">
+                    <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Bazar &amp; Pameran Produk Kreatif</div>
+                    <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Hiburan Musik &amp; Pentas Seni</div>
+                    <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Sharing Session Bersama Alumni</div>
+                    <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Sharing Session &amp; Presentasi Kampus</div>
+                    <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Interview Langsung dengan Mitra Industri</div>
+                </div>
+
+                <!-- Galeri Foto Kegiatan (4 Foto) -->
+                <h3 class="section-heading">Galeri &amp; Suasana Kegiatan</h3>
+                <div class="photo-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80" alt="Pameran & Expo">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" alt="Sharing Session">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=600&q=80" alt="Interview Kerja">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Edu Fair Kampus">
+                    </div>
+                </div>
+
+                <!-- Lokasi Acara (Google Maps) -->
+                <h3 class="section-heading">Lokasi Acara</h3>
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=SMKN%206%20Kota%20Tangerang%20Selatan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <a href="https://maps.google.com/?q=SMKN+6+Kota+Tangerang+Selatan" target="_blank" rel="noopener noreferrer" class="map-footer-link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka di Google Maps
+                    </a>
+                </div>
+
+                <!-- Konfirmasi Kehadiran (RSVP) Terhubung WhatsApp -->
+                <div class="rsvp-box">
+                    <h3>Konfirmasi Kehadiran (RSVP)</h3>
+                    <p>Mohon konfirmasi kehadiran Bapak/Ibu/Saudara/i melalui pilihan di bawah ini:</p>
+                    <div class="rsvp-actions">
+                        <button type="button" class="btn-rsvp-yes" onclick="konfirmasiRSVP('Hadir')">
+                            <i class="fa-solid fa-circle-check"></i> Saya Hadir
+                        </button>
+                        <button type="button" class="btn-rsvp-no" onclick="konfirmasiRSVP('Berhalangan')">
+                            <i class="fa-solid fa-circle-xmark"></i> Berhalangan
+                        </button>
+                    </div>
+                </div>
+
+                <div class="footer-closing">
+                    Mengenal Potensi, Menemukan Peluang, Menata Masa Depan. Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.
+                    <strong>Panitia Edu Fair &amp; Career Expo 2026 — SMKN 6 Kota Tangerang Selatan</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mengambil data parameter nama tamu dari URL WhatsApp
+        const urlParams = new URLSearchParams(window.location.search);
+        const nama = urlParams.get('to');
+
+        if (nama) {
+            document.getElementById('cover-nama').textContent = nama;
+            document.getElementById('main-nama').textContent = nama;
+        }
+
+        // Kontrol Musik / Audio Latar Lokal
+        const music = document.getElementById('bgMusic');
+        const audioBtn = document.getElementById('audioBtn');
+        const audioIcon = document.getElementById('audioIcon');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                music.pause();
+                audioIcon.className = "fa-solid fa-music";
+                audioBtn.style.opacity = "0.7";
+                isPlaying = false;
+            } else {
+                music.play();
+                audioIcon.className = "fa-solid fa-compact-disc fa-spin";
+                audioBtn.style.opacity = "1";
+                isPlaying = true;
+            }
+        }
+
+        // Animasi transisi saat tombol Buka Undangan diklik & musik langsung berputar
+        function bukaUndangan() {
+            const cover = document.getElementById('coverPage');
+            const main = document.getElementById('mainCard');
+
+            music.volume = 0.8;
+            music.play().then(() => {
+                isPlaying = true;
+                audioIcon.className = "fa-solid fa-compact-disc fa-spin";
+                audioBtn.style.opacity = "1";
+            }).catch((err) => {
+                console.log("Audio play diblokir otomatis oleh browser, silakan klik tombol ikon musik manual.");
+            });
+
+            cover.classList.add('hidden');
+            main.classList.add('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hitung Mundur Waktu (Countdown Timer ke 25 November 2026 pukul 07:00 WIB)
+        const eventDate = new Date("November 25, 2026 07:00:00").getTime();
+
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").textContent = String(days).padStart(2, '0');
+                document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+                document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+            }
+        }, 1000);
+
+        // Fungsi tombol konfirmasi kehadiran RSVP langsung ke WhatsApp Panitia tanpa emoji
+        function konfirmasiRSVP(status) {
+            const namaTamu = document.getElementById('main-nama').textContent;
+
+            if (!namaTamu || namaTamu === "Tamu Undangan") {
+                alert("Nama tamu tidak valid.");
+                return;
+            }
+
+            const noWaPanitia = '6285717812816';
+
+            const pesan = "Halo Panitia Edu Fair & Career Expo 2026 SMKN 6 Kota Tangerang Selatan,\n\nSaya *" + namaTamu + "* ingin mengonfirmasi kehadiran:\nStatus: *" + status + "*\n\nTerima kasih.";
+
+            const waUrl = "https://wa.me/" + noWaPanitia + "?text=" + encodeURIComponent(pesan);
+            window.location.href = waUrl;
+        }
+    </script>
+</body>
+</html>
